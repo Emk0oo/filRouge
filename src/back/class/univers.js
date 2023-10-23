@@ -56,6 +56,9 @@ class Univers{
         this.idImage = idImage;
     }
 
-    
+getCharacter() {
+    return true;
 }
+}
+
 

@@ -4,6 +4,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.6.2"
   },
+  "main": "api.js",
   "scripts": {
     "start": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
