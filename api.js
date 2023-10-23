@@ -24,7 +24,7 @@ app.post("/utilisateurs/add", (req, res) => {
   // connection.query(sql, tab, (err, rows, fields) => {
   //   if (err) throw err;
   //   res.status(200).json(rows);
-  // }); 
+  // });
   let body = req.body;
   const data = req.body;
   const requete = `INSERT INTO utilisateurs (id, nom, prenom, pseudo, mdp, id_message) VALUES ('${body.id}', '${body.nom}', '${body.prenom}', '${body.pseudo}', '${body.mdp}', '${body.id_message}')`;
@@ -43,7 +43,9 @@ app.put("/utilisateurs/update/:id", (req, res) => {
     res.send("1 record updated");
   });
 });
-
+//////////////////////////////////////////////
+//////////////UTILISATEURS////////////////////
+//////////////////////////////////////////////
 app.get("utilisateurs", (req, res) => {
   connection.query("SELECT * FROM users", (err, rows, fields) => {
     if (err) throw err;
@@ -62,6 +64,17 @@ app.get("/utilisateurs/:id", (req, res) => {
   );
 });
 
+//////////////////////////////////////////////
+//////////////UNIVERS/////////////////////////
+//////////////////////////////////////////////
+
+app.get("/univers", (req, res) => {
+  connection.query("SELECT * FROM univers", (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  });
+});
+
 app.post("/univers/add", (req, res) => {
   let body = req.body;
   const data = req.body;
@@ -72,11 +85,15 @@ app.post("/univers/add", (req, res) => {
   });
 });
 
-app.get("/univers", (req, res) => {
-  connection.query("SELECT * FROM univers", (err, rows, fields) => {
+app.post("/univers/:id/characters", (req, res) => {
+  let body = req.body;
+  res.send(req.body);
+  let sql = `INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES ('${body.nom}', '${body.id_images}', '${body.id_messages}' , ${req.params.id})`;
+  connection.query(sql, function (err, result) {
     if (err) throw err;
-    res.send(rows);
+    console.log("1 record inserted");
   });
+  res.send("Personnage ajouté avec succès.");
 });
 
 app.get("/univers/:id", (req, res) => {
@@ -90,20 +107,32 @@ app.get("/univers/:id", (req, res) => {
   );
 });
 
+app.put("/univers/update/:id", (req, res) => {
+  let body = req.body;
+  const data = req.body;
+  const requete = `UPDATE univers SET description = '${body.description}', id_utilisateurs = '${body.id_utilisateurs}', nom = '${body.nom}', id_images = '${body.id_images}', nb_perso = '${body.nb_perso}' WHERE id = '${req.params.id}'`;
+  connection.query(requete, function (err, result) {
+    if (err) throw err;
+    res.send("1 record updated");
+  });
+});
+
+app.delete("/univers/delete/:id", (req, res) => {
+  const requete = `DELETE FROM univers WHERE id = '${req.params.id}'`;
+  connection.query(requete, function (err, result) {
+    if (err) throw err;
+    res.send("1 record deleted");
+  });
+});
+
+//////////////////////////////////////////////
+//////////////PERSONNAGES/////////////////////
+//////////////////////////////////////////////
+
 app.get("/personnages", (req, res) => {
   connection.query("SELECT * FROM personnages", (err, rows, fields) => {
     if (err) throw err;
     res.send(rows);
-  });
-});
-
-app.post("/personnages/add", (req, res) => {
-  let body = req.body;
-  const data = req.body;
-  const requete = `INSERT INTO personnages (id, nom, id_images, id_messages) VALUES ('${body.id}', '${body.nom}', '${body.id_images}', '${body.id_messages}')`;
-  connection.query(requete, function (err, result) {
-    if (err) throw err;
-    res.send("1 record inserted");
   });
 });
 
@@ -117,6 +146,10 @@ app.get("/personnages/:id", (req, res) => {
     }
   );
 });
+
+//////////////////////////////////////////////
+//////////////IMAGES//////////////////////////
+//////////////////////////////////////////////
 
 app.get("/images", (req, res) => {
   connection.query("SELECT * FROM images", (err, rows, fields) => {
@@ -148,4 +181,3 @@ connection.connect(function (error) {
     console.log("connecté");
   }
 });
-
