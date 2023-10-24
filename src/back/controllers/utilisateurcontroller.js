@@ -65,4 +65,4 @@ exports.getUserById= (req, res) => {
 const messageRouter= require('./messagecontroller');
 router.use('/:id/messages', messageRouter);
 
-module.exports = router;
+module.exports = exports;

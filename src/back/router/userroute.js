@@ -7,4 +7,4 @@ router.get("/:id", userController.getUserById);
 router.post("/add", userController.addUser);
 router.put("/update/:id", userController.updateUser);
 
-exports.router = router;
+module.exports = router;
