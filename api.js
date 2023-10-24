@@ -250,8 +250,9 @@ app.get("/user/:idUser/messages/", (req, res) => {
 
 app.post("/user/:idUser/messages/", (req, res) => {
   const userData = req.body;
-  const sql = "INSERT INTO messages (contenu) VALUES (?)";
-  const values = [userData.contenu];
+  const idUser = req.params.idUser;
+  const sql = "INSERT INTO messages (isHumain, date_dernier_message, contenu, id_utilisateur) VALUES (?, ?, ?, ?) ";
+  const values = [userData.isHumain, userData.date_dernier_message,userData.contenu, idUser];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
