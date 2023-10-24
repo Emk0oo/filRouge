@@ -265,35 +265,6 @@ app.post("/user/:idUser/messages/", (req, res) => {
   });
 });
 
-// app.post("/user/:idUser/messages/", (req, res) => {
-
-
-// });
-
-
-//////////////////////////////////////////////
-//////////////IMAGES//////////////////////////
-//////////////////////////////////////////////
-
-app.get("/images", (req, res) => {
-  connection.query("SELECT * FROM images", (err, rows, fields) => {
-    if (err) throw err;
-    res.send(rows);
-  });
-});
-
-app.post("/images/add", (req, res) => {
-  let body = req.body;
-  const data = req.body;
-  const requete = `INSERT INTO images (id, url) VALUES ('${body.id}', '${body.url}')`;
-  connection.query(requete, function (err, result) {
-    if (err) throw err;
-    res.send("1 record inserted");
-  });
-});
-
-app.get("/images/:id", (req, res) => {});
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
