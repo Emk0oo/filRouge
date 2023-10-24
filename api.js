@@ -231,11 +231,10 @@ app.delete("/univers/:id/characters", (req, res) => {
 //////////////////////////////////////////////
 
 //récupération message user
-app.get("/user/:idUser/messages/:idMessage", (req, res) => {
+app.get("/user/:idUser/messages/", (req, res) => {
   const idUser = req.params.idUser;
-  const idMessage = req.params.idMessage;
-  const sql = "SELECT * FROM messages WHERE id_utilisateur = ? AND id = ?";
-  const values = [idUser, idMessage];
+  const sql = `SELECT m.contenu, m.id FROM messages m JOIN utilisateurs u on u.id_message=m.id WHERE m.id = ?`;
+  const values = [idUser];
 
   connection.query(sql, values, (err, rows, fields) => {
     if (err) {
@@ -243,6 +242,24 @@ app.get("/user/:idUser/messages/:idMessage", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la récupération des messages" });
     } else {
       res.status(200).json(rows);
+    }
+  });
+});
+
+//envoi nouveau message user
+
+app.post("/user/:idUser/messages/", (req, res) => {
+  const userData = req.body;
+  const sql = "INSERT INTO messages (contenu) VALUES (?)";
+  const values = [userData.contenu];
+
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Erreur lors de l'insertion :", err);
+      res.status(500).json({ error: "Erreur lors de l'insertion" });
+    } else {
+      console.log("Enregistrement inséré avec succès !");
+      res.status(200).json({ message: "Enregistrement inséré avec succès" });
     }
   });
 });
