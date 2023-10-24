@@ -225,27 +225,33 @@ app.delete("/univers/:id/characters", (req, res) => {
     }
   });
 });
+
 //////////////////////////////////////////////
-//////////////PERSONNAGES/////////////////////
+//////////////MESSAGES////////////////////////
 //////////////////////////////////////////////
 
-// app.get("/personnages", (req, res) => {
-//   connection.query("SELECT * FROM personnages", (err, rows, fields) => {
-//     if (err) throw err;
-//     res.send(rows);
-//   });
+//récupération message user
+app.get("/user/:idUser/messages/:idMessage", (req, res) => {
+  const idUser = req.params.idUser;
+  const idMessage = req.params.idMessage;
+  const sql = "SELECT * FROM messages WHERE id_utilisateur = ? AND id = ?";
+  const values = [idUser, idMessage];
+
+  connection.query(sql, values, (err, rows, fields) => {
+    if (err) {
+      console.error("Erreur lors de la récupération des messages :", err);
+      res.status(500).json({ error: "Erreur lors de la récupération des messages" });
+    } else {
+      res.status(200).json(rows);
+    }
+  });
+});
+
+// app.post("/user/:idUser/messages/", (req, res) => {
+
+
 // });
 
-// app.get("/personnages/:id", (req, res) => {
-//   connection.query(
-//     "SELECT * FROM personnages WHERE id= ?",
-//     [req.params.id],
-//     (err, rows, fields) => {
-//       if (err) throw err;
-//       res.send(rows);
-//     }
-//   );
-// });
 
 //////////////////////////////////////////////
 //////////////IMAGES//////////////////////////
