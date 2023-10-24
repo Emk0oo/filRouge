@@ -12,16 +12,12 @@ app.get("/hello", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use('/utilisateurs', require('./src/back/controllers/utilisateurcontroller'));
-app.use('/univers', require('./src/back/controllers/universcontroller'));
+app.use('/utilisateurs', require('./src/back/router/userroute'));
+app.use('/univers', require('./src/back/router/univerrouter'));
+app.use('/personnages', require('./src/back/router/personnagerouter'));
 
 // controller /univers 
 //app.use("/univers", require("./controllers/univers")
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

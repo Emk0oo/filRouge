@@ -10,7 +10,7 @@ const connection= require("./../mysql");
 //////////////////////////////////////////////
 
 //récupération message user
-router.get("/user/:idUser/messages/", (req, res) => {
+exports.getMessage= (req, res) => {
     const idUser = req.params.idUser;
     const sql = `SELECT m.contenu, m.id FROM messages m JOIN utilisateurs u on u.id_message=m.id WHERE m.id = ?`;
     const values = [idUser];
@@ -23,7 +23,7 @@ router.get("/user/:idUser/messages/", (req, res) => {
         res.status(200).json(rows);
       }
     });
-  });
+  };
   
   //envoi nouveau message user
   
@@ -43,3 +43,5 @@ router.get("/user/:idUser/messages/", (req, res) => {
       }
     });
   });
+
+  module.exports = router;

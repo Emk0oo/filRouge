@@ -11,16 +11,16 @@ const connection = require("./../mysql");
 
 //récupération de l'ensemble des univers
 
-router.get("/", (req, res) => {
+exports.getAllUnivers=(req, res) => {
   connection.query("SELECT * FROM univers", (err, rows, fields) => {
     if (err) throw err;
     res.send(rows);
   });
-});
+};
 
 //création d'un univers
 
-router.post("/add", (req, res) => {
+exports.addUnivers=(req, res) => {
   const universData = req.body;
   const sql =
     "INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
@@ -41,11 +41,11 @@ router.post("/add", (req, res) => {
       res.status(200).json({ message: "Enregistrement inséré avec succès" });
     }
   });
-});
+};
 
 //récupération d'un univers
 
-router.get("/:id", (req, res) => {
+exports.getUniversById=(req, res) => {
   connection.query(
     "SELECT * FROM univers WHERE id= ?",
     [req.params.id],
@@ -54,11 +54,11 @@ router.get("/:id", (req, res) => {
       res.send(rows);
     }
   );
-});
+};
 
 //Modification d'un univers
 
-router.put("/update/:id", (req, res) => {
+exports.updateUnivers=(req, res) => {
   const body = req.body;
   const id = req.params.id;
 
@@ -85,11 +85,11 @@ router.put("/update/:id", (req, res) => {
         .json({ message: "Enregistrement mis à jour avec succès" });
     }
   });
-});
+};
 
 //Suppression d'un univers
 
-router.delete("delete/:id", (req, res) => {
+exports.deleteUnivers=(req, res) => {
   const id = req.params.id;
 
   // Utilisez une requête préparée pour supprimer l'enregistrement
@@ -105,6 +105,8 @@ router.delete("delete/:id", (req, res) => {
       res.status(200).json({ message: "Enregistrement supprimé avec succès" });
     }
   });
-});
+};
 
+const personnageRouter = require("./personnagecontroller");
+router.use("/:id/personnages", personnageRouter);
 module.exports = router;
