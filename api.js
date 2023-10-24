@@ -71,12 +71,19 @@ app.get("/utilisateurs/:id", (req, res) => {
 //////////////UNIVERS/////////////////////////
 //////////////////////////////////////////////
 
+// controller /univers 
+//app.use("/univers", require("./controllers/univers")
+
+//récupération de l'ensemble des univers
+
 app.get("/univers", (req, res) => {
   connection.query("SELECT * FROM univers", (err, rows, fields) => {
     if (err) throw err;
     res.send(rows);
   });
 });
+
+//création d'un univers
 
 app.post("/univers/add", (req, res) => {
   const universData = req.body;
@@ -94,6 +101,8 @@ app.post("/univers/add", (req, res) => {
   });
 });
 
+//récupération d'un univers
+
 app.get("/univers/:id", (req, res) => {
   connection.query(
     "SELECT * FROM univers WHERE id= ?",[req.params.id],(err, rows, fields) => {
@@ -103,21 +112,7 @@ app.get("/univers/:id", (req, res) => {
   );
 });
 
-app.post("/univers/:id/characters", (req, res) => {
-  const personnagesData = req.body;
-  let sql="INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES (?, ?, ?, ?)";
-  const values = [personnagesData.nom, personnagesData.id_images, personnagesData.id_messages, personnagesData.id_univers];
-  console.log(values);
-  connection.query(sql, values, (err, result) => {
-    if (err) {
-      console.error("Erreur lors de l'insertion :", err);
-      res.status(500).json({ error: "Erreur lors de l'insertion" });
-    } else {
-      console.log("Enregistrement inséré avec succès !");
-      res.status(200).json({ message: "Enregistrement inséré avec succès" });
-    }
-  });
-});
+//Modification d'un univers
 
 app.put("/univers/update/:id", (req, res) => {
   const body = req.body;
@@ -138,35 +133,119 @@ app.put("/univers/update/:id", (req, res) => {
   });
 });
 
+//Suppression d'un univers
+
 app.delete("/univers/delete/:id", (req, res) => {
-  const requete = `DELETE FROM univers WHERE id = '${req.params.id}'`;
-  connection.query(requete, function (err, result) {
-    if (err) throw err;
-    res.send("1 record deleted");
+  const id = req.params.id;
+
+  // Utilisez une requête préparée pour supprimer l'enregistrement
+  const sql = "DELETE FROM univers WHERE id = ?";
+  const values = [id];
+
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Erreur lors de la suppression :", err);
+      res.status(500).json({ error: "Erreur lors de la suppression" });
+    } else {
+      console.log("Enregistrement supprimé avec succès !");
+      res.status(200).json({ message: "Enregistrement supprimé avec succès" });
+    }
   });
 });
 
+//Récupération de l'ensemble des personnages d'un univers
+
+app.get("/univers/:id/characters", (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM personnages WHERE id_univers = ?";
+  const values = [id];
+
+  connection.query(sql, values, (err, rows, fields) => {
+    if (err) {
+      console.error("Erreur lors de la récupération des personnages :", err);
+      res.status(500).json({ error: "Erreur lors de la récupération des personnages" });
+    } else {
+      res.status(200).json(rows);
+    }
+  });
+});
+
+//Création d'un personnage dans un univers
+
+app.post("/univers/:id/characters", (req, res) => {
+  const personnagesData = req.body;
+  let sql="INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES (?, ?, ?, ?)";
+  const values = [personnagesData.nom, personnagesData.id_images, personnagesData.id_messages, personnagesData.id_univers];
+  console.log(values);
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Erreur lors de l'insertion :", err);
+      res.status(500).json({ error: "Erreur lors de l'insertion" });
+    } else {
+      console.log("Enregistrement inséré avec succès !");
+      res.status(200).json({ message: "Enregistrement inséré avec succès" });
+    }
+  });
+});
+
+//Modification d'un personnage dans un univers
+
+app.put("/univers/:id/characters", (req, res) => {
+  const personnagesData = req.body;
+  const id = req.params.id;
+  let sql="UPDATE personnages SET nom = ?, id_images = ?, id_messages = ?, id_univers = ? WHERE id = ?";
+  const values = [personnagesData.nom, personnagesData.id_images, personnagesData.id_messages, personnagesData.id_univers, id];
+  console.log(values);
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Erreur lors de l'insertion :", err);
+      res.status(500).json({ error: "Erreur lors de l'insertion" });
+    } else {
+      console.log("Enregistrement inséré avec succès !");
+      res.status(200).json({ message: "Enregistrement inséré avec succès" });
+    }
+  });
+});
+
+//Suppression d'un personnage dans un univers
+
+app.delete("/univers/:id/characters", (req, res) => {
+  const personnagesData = req.body;
+  const id = req.params.id;
+  let sql="DELETE FROM personnages WHERE id = ?";
+  const values = [id];
+  console.log(values);
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Erreur lors de la suppression :", err);
+      res.status(500).json({ error: "Erreur lors de la suppression" });
+    } else {
+      console.log("Enregistrement supprimé avec succès !");
+      res.status(200).json({ message: "Enregistrement supprimé avec succès" });
+    }
+  });
+});
 //////////////////////////////////////////////
 //////////////PERSONNAGES/////////////////////
 //////////////////////////////////////////////
 
-app.get("/personnages", (req, res) => {
-  connection.query("SELECT * FROM personnages", (err, rows, fields) => {
-    if (err) throw err;
-    res.send(rows);
-  });
-});
+// app.get("/personnages", (req, res) => {
+//   connection.query("SELECT * FROM personnages", (err, rows, fields) => {
+//     if (err) throw err;
+//     res.send(rows);
+//   });
+// });
 
-app.get("/personnages/:id", (req, res) => {
-  connection.query(
-    "SELECT * FROM personnages WHERE id= ?",
-    [req.params.id],
-    (err, rows, fields) => {
-      if (err) throw err;
-      res.send(rows);
-    }
-  );
-});
+// app.get("/personnages/:id", (req, res) => {
+//   connection.query(
+//     "SELECT * FROM personnages WHERE id= ?",
+//     [req.params.id],
+//     (err, rows, fields) => {
+//       if (err) throw err;
+//       res.send(rows);
+//     }
+//   );
+// });
 
 //////////////////////////////////////////////
 //////////////IMAGES//////////////////////////
