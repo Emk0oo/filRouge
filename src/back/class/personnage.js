@@ -7,6 +7,20 @@ class Personnage {
     this.idUnivers = idUnivers;
   }
 
+  toMap() {
+    return {
+      id: this.id,
+      nom: this.nom,
+      description: this.description,
+    };
+  }
+
+  static fromMap(map) {
+    this.id = map.id;
+    this.nom = map.nom;
+    this.description = map.description;
+  }
+
   get id() {
     return this.id;
   }

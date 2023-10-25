@@ -7,6 +7,25 @@ class Univers{
         this.idPersonnage = idPersonnage;
         this.idImage = idImage;
     }
+
+    toMap(){    
+        return {
+            idUnivers: this.idUnivers,
+            nom: this.nom,
+        };
+    }
+
+    static fromMap(map){
+        this.idUnivers = map.idUnivers;
+        this.nom = map.nom;
+    }
+
+    genererDescription(){
+
+    }
+
+
+
     get idUnivers(){
         return this.idUnivers;
     }   

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
+const dotenv= require('dotenv').config();
 
+const secretKey= process.env.SECRET_KEY;
 // check jwt token
 const checkToken = (req, res, next) => {
 

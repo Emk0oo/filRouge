@@ -6,6 +6,10 @@ const port = 3000;
 const checkToken= require('./src/back/middleware/checktoken')
 // jwt
 const jwt = require('jsonwebtoken');
+const dotenv= require('dotenv').config();
+
+const secretKey= process.env.SECRET_KEY;
+
 
 app.use(express.json());
 
@@ -36,12 +40,12 @@ app.post("/auth", (req, res) => {
   let requete = `SELECT * FROM utilisateurs WHERE pseudo = '${login}' AND mdp = '${password}'`;
   connection.query(requete, (err, rows, fields) => {
     if (err) {
-      res.status(403).json({ error: "utikisateur inconnu" });
+      res.status(403).json({ error: "utilisateur inconnu" });
     }
     console.log(rows);
 
 if(rows.length == 0) {
-      res.status(403).json({ error: "utikisateur inconnu" });
+      res.status(403).json({ error: "utilisateur inconnu" });
     }
 
     // jwt
@@ -51,7 +55,7 @@ if(rows.length == 0) {
     // let pseudo = rows[0].pseudo;
 
     // generate token
-    jwt.sign({id, nom}, 'juxdtjcghtcrgtxrht', (err, token) => {
+    jwt.sign({id, nom}, secretKey, { algorithm: 'RS256', expiresIn: '48h' }, (err, token) => {
       res.json({
         token : token
       });
@@ -60,14 +64,14 @@ if(rows.length == 0) {
   });
 });
 
+//Appelle les routes
+//Route univers(qui inclue personnages)
 app.use('/univers', require('./src/back/router/univerrouter'));
+
+//Route utilisateurs(qui inclue messages)
 app.use('/utilisateurs', require('./src/back/router/userroute'));
 
-// controller /univers 
-//app.use("/univers", require("./controllers/univers")
-// 
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-

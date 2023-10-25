@@ -11,10 +11,12 @@ const connection= require("./../mysql");
 
 //récupération message user
 exports.getMessage= (req, res) => {
-    const idUser = req.params.idUser;
-    const sql = `SELECT m.contenu, m.id FROM messages m JOIN utilisateurs u on u.id_message=m.id WHERE m.id = ?`;
-    const values = [idUser];
-  
+    const idMessage = req.originalUrl.split("/")[2];
+    const sql = `SELECT m.contenu, m.id FROM messages m JOIN utilisateurs u on u.id_message=m.id WHERE u.id = ?`;
+    const values = [idMessage];
+
+    console.log(idMessage);
+
     connection.query(sql, values, (err, rows, fields) => {
       if (err) {
         console.error("Erreur lors de la récupération des messages :", err);
@@ -30,7 +32,7 @@ exports.getMessage= (req, res) => {
   // router.post("/user/:idUser/messages/", 
   exports.addMessage=(req, res) => {
     const userData = req.body;
-    const idUser = req.params.idUser;
+    const idUser = req.originalUrl.split("/")[2];
     const sql = "INSERT INTO messages (isHumain, date_dernier_message, contenu, id_utilisateur) VALUES (?, ?, ?, ?) ";
     const values = [userData.isHumain, userData.date_dernier_message,userData.contenu, idUser];
   

@@ -8,6 +8,22 @@ class Message {
     this.idDiscussion = idDiscussion;
   }
 
+  toMap() {
+    return{
+      id: this.id,
+      texte: this.texte,
+      date: this.date,
+    }
+  }
+
+  static fromMap(map) {
+    this.id = map.id;
+    this.texte = map.texte;
+    this.date = map.date;
+  }
+
+  
+
   get texte() {
     return this.texte;
   }
