@@ -9,6 +9,6 @@ router.put("/update/:id", universController.updateUnivers);
 router.delete("/delete/:id", universController.deleteUnivers);
 
 const personnageRouter = require("./personnagerouter");
-router.use("/:id/personnages", personnageRouter);
+router.use("/:id/characters", personnageRouter);
 
 module.exports = router;

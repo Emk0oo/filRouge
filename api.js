@@ -61,7 +61,7 @@ if(rows.length == 0) {
 });
 
 app.use('/univers', require('./src/back/router/univerrouter'));
-// app.use('/utilisateurs', require('./src/back/router/userroute'));
+app.use('/utilisateurs', require('./src/back/router/userroute'));
 
 // controller /univers 
 //app.use("/univers", require("./controllers/univers")
