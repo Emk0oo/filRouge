@@ -103,6 +103,7 @@ exports.deleteUnivers=(req, res) => {
     } else {
       console.log("Enregistrement supprimé avec succès !");
       res.status(200).json({ message: "Enregistrement supprimé avec succès" });
+      console.log(id);
     }
   });
 };

@@ -8,7 +8,7 @@ const connection = require("../mysql");
 //Récupération de l'ensemble des personnages d'un univers
 
 exports.getAllPersonnages = (req, res) => {
-  const id = req.params.id;
+  const id = req.originalUrl.split("/")[2];
   const sql = "SELECT * FROM personnages WHERE id_univers = ?";
   const values = [id];
 
@@ -18,8 +18,10 @@ exports.getAllPersonnages = (req, res) => {
       res
         .status(500)
         .json({ error: "Erreur lors de la récupération des personnages" });
+        console.log(sql, values)
     } else {
       res.status(200).json(rows);
+      console.log(sql, values);
     }
   });
 };
@@ -52,7 +54,8 @@ exports.addPersonnage = (req, res) => {
 
 exports.updatePersonnage = (req, res) => {
   const personnagesData = req.body;
-  const id = req.params.id;
+  const id = req.originalUrl.split("/")[2];
+  const idCharacter= req.params.idCharacter;//req.params.id;
   let sql =
     "UPDATE personnages SET nom = ?, id_images = ?, id_messages = ?, id_univers = ? WHERE id = ?";
   const values = [
@@ -60,7 +63,7 @@ exports.updatePersonnage = (req, res) => {
     personnagesData.id_images,
     personnagesData.id_messages,
     personnagesData.id_univers,
-    id,
+    idCharacter,
   ];
   console.log(values);
   connection.query(sql, values, (err, result) => {
@@ -78,8 +81,8 @@ exports.updatePersonnage = (req, res) => {
 
 exports.deletePersonnage = (req, res) => {
   const personnagesData = req.body;
-  const id = req.params.id;
-  let sql = "DELETE FROM personnages WHERE id = ?";
+  const id = req.params.idCharacter;
+  let sql = "DELETE FROM personnages WHERE id = ?"
   const values = [id];
   console.log(values);
   connection.query(sql, values, (err, result) => {
