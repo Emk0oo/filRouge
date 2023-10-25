@@ -12,16 +12,20 @@ class Univers{
         return {
             idUnivers: this.idUnivers,
             nom: this.nom,
+            description: this.description,
         };
     }
 
     static fromMap(map){
-        this.idUnivers = map.idUnivers;
-        this.nom = map.nom;
+        let univers= new Univers(map.name);
+        univers.idUnivers = map.idUnivers;
+        univers.nom = map.nom;
+        univers.description = map.description;
+        return univers;
     }
 
     genererDescription(){
-
+        this.description="Génère une description de l'univers de "+this.nom;
     }
 
 

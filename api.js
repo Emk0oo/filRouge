@@ -51,8 +51,6 @@ if(rows.length == 0) {
     // jwt
     let id = rows[0]["id"];
     let nom = rows[0]["nom"]
-    // let prenom = rows[0].prenom;
-    // let pseudo = rows[0].pseudo;
 
     // generate token
     jwt.sign({id, nom}, secretKey, { algorithm: 'RS256', expiresIn: '48h' }, (err, token) => {

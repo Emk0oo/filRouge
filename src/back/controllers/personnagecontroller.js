@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const port = 3000;
 //const router = express.Router();
 const connection = require("../mysql");
+const personnage= require("../class/personnage");
 
 //Récupération de l'ensemble des personnages d'un univers
 
