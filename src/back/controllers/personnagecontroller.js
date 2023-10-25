@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const port = 3000;
-const router = express.Router();
+//const router = express.Router();
 const connection = require("../mysql");
 
 //Récupération de l'ensemble des personnages d'un univers
@@ -93,4 +93,4 @@ exports.deletePersonnage = (req, res) => {
   });
 };
 
-module.exports = router;
+module.exports = exports;

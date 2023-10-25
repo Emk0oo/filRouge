@@ -107,7 +107,7 @@ exports.deleteUnivers=(req, res) => {
   });
 };
 
-const personnageRouter = require("./personnagecontroller");
-router.use("/:id/personnages", personnageRouter);
+// const personnageRouter = require("./personnagecontroller");
+// router.use("/:id/personnages", personnageRouter);
 
 module.exports = exports;

@@ -24,7 +24,7 @@ connection.connect(function (error) {
   }
 });
 
-app.use(checkToken);
+app.use(checkToken); //utilise middeleware checktoken
 
 app.get("/hello", (req, res) => {
   res.send("Hello World!");
@@ -60,13 +60,12 @@ if(rows.length == 0) {
   });
 });
 
-app.use('/utilisateurs', require('./src/back/router/userroute'));
 app.use('/univers', require('./src/back/router/univerrouter'));
-// app.use('/personnages', require('./src/back/router/personnagerouter'));
+// app.use('/utilisateurs', require('./src/back/router/userroute'));
 
 // controller /univers 
 //app.use("/univers", require("./controllers/univers")
-
+// 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

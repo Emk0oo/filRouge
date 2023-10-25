@@ -28,7 +28,7 @@ const checkToken = (req, res, next) => {
 
     } else {
         // forbidden
-        res.status(403).json({ error: "token manquant" });
+        res.status(401).json({ error: "token manquant" });
     }
 }
 

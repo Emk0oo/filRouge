@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const port = 3000;
-const router= express.Router();
+// const router= express.Router();
 const connection= require("./../mysql");
 
 //////////////////////////////////////////////
@@ -27,7 +27,8 @@ exports.getMessage= (req, res) => {
   
   //envoi nouveau message user
   
-  router.post("/user/:idUser/messages/", (req, res) => {
+  // router.post("/user/:idUser/messages/", 
+  exports.addMessage=(req, res) => {
     const userData = req.body;
     const idUser = req.params.idUser;
     const sql = "INSERT INTO messages (isHumain, date_dernier_message, contenu, id_utilisateur) VALUES (?, ?, ?, ?) ";
@@ -42,6 +43,6 @@ exports.getMessage= (req, res) => {
         res.status(200).json({ message: "Enregistrement inséré avec succès" });
       }
     });
-  });
+  };
 
-  module.exports = router;
+  module.exports = exports;

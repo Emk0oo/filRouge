@@ -7,4 +7,7 @@ router.get("/:id", userController.getUserById);
 router.post("/add", userController.addUser);
 router.put("/update/:id", userController.updateUser);
 
+const messageRouter= require('./messagecontroller');
+router.use('/:id/messages', messageRouter);
+
 module.exports = router;

@@ -7,4 +7,4 @@ router.post("/:id/characters", personnageController.addPersonnage);
 router.put("/:id/characters", personnageController.updatePersonnage);
 router.delete("/:id/characters", personnageController.deletePersonnage);
 
-exports.router = router;
+module.exports = router;
