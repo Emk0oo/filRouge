@@ -13,6 +13,9 @@ class Univers{
             idUnivers: this.idUnivers,
             nom: this.nom,
             description: this.description,
+            nbPersonnage: this.nbPersonnage,
+            idPersonnage: this.idPersonnage,
+            idImage: this.idImage,
         };
     }
 
@@ -21,6 +24,9 @@ class Univers{
         univers.idUnivers = map.idUnivers;
         univers.nom = map.nom;
         univers.description = map.description;
+        univers.nbPersonnage = map.nbPersonnage;
+        univers.idPersonnage = map.idPersonnage;
+        univers.idImage = map.idImage;
         return univers;
     }
 

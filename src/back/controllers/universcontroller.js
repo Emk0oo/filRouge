@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const port = 3000;
 const router = express.Router();
 const connection = require("./../mysql");
-const univers= require("../class/univers");
+const Univers= require("../class/univers");
 
 //////////////////////////////////////////////
 //////////////UNIVERS/////////////////////////
@@ -13,6 +13,7 @@ const univers= require("../class/univers");
 //récupération de l'ensemble des univers
 
 exports.getAllUnivers=(req, res) => {
+
   connection.query("SELECT * FROM univers", (err, rows, fields) => {
     if (err) throw err;
     res.send(rows);
@@ -22,9 +23,15 @@ exports.getAllUnivers=(req, res) => {
 //création d'un univers
 
 exports.addUnivers=(req, res) => {
+  // let univers= Univers.fromMap(req.body); //from map 
+  // univers.genererDescription();
+
   const universData = req.body;
-  const sql =
-    "INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
+  const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
+
+  // const valueUnivers = [univers.description, univers.id_utilisateurs, univers.nom, univers.id_images, univers.nb_perso];
+
+
   const values = [
     universData.description,
     universData.id_utilisateurs,
@@ -47,6 +54,8 @@ exports.addUnivers=(req, res) => {
 //récupération d'un univers
 
 exports.getUniversById=(req, res) => {
+  let univers= Univers.fromMap(req.body); //from map
+
   connection.query(
     "SELECT * FROM univers WHERE id= ?",
     [req.params.id],
