@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const port = 3000;
 const router = express.Router();
 const connection = require("./../mysql");
-const utilisateur = require("../class/utilisateur");
 const Utilisateur = require("../class/utilisateur");
 
 //////////////////////////////////////////////
