@@ -1,93 +1,90 @@
-class Univers{
-    constructor(idUnivers, nom, description, nbPersonnage, idPersonnage, idImage){
-        this.idUnivers = idUnivers;
-        this.nom = nom;
-        this.description = description;
-        this.nbPersonnage = nbPersonnage;
-        this.idPersonnage = idPersonnage;
-        this.idImage = idImage;
-    }
+const Chatopenai = require("./chatopenai");
 
-    toMap(){    
-        return {
-            idUnivers: this.idUnivers,
-            nom: this.nom,
-            description: this.description,
-            nbPersonnage: this.nbPersonnage,
-            idPersonnage: this.idPersonnage,
-            idImage: this.idImage,
-        };
-    }
+class Univers {
+  constructor(id, description, id_utilisateur, nom, id_images, nb_perso) {
+    this._id = id;
+    this._description = description;
+    this._id_utilisateur = id_utilisateur;
+    this._nom = nom;
+    this._id_images = id_images;
+    this._nb_perso = nb_perso;
+  }
 
-    static fromMap(map){
-        let univers= new Univers(map.name);
-        univers.idUnivers = map.idUnivers;
-        univers.nom = map.nom;
-        univers.description = map.description;
-        univers.nbPersonnage = map.nbPersonnage;
-        univers.idPersonnage = map.idPersonnage;
-        univers.idImage = map.idImage;
-        return univers;
-    }
+  static fromMap(map) {
+    let univers = new Univers(map.nom);
+    univers._description = map.description;
+    univers._id_utilisateur = map.id_utilisateur;
+    univers._nom = map.nom;
+    univers._id_images = map.id_images;
+    univers._nb_perso = map.nb_perso;
+    return univers;
+  }
+  toMap() {
+    return {
+      id: this._id,
+      description: this._description,
+      id_utilisateur: this._id_utilisateur,
+      nom: this._nom,
+      id_images: this._id_images,
+      nb_perso: this._nb_perso,
+    };
+  }
 
-    genererDescription(){
-        this.description="Génère une description de l'univers de "+this.nom;
-    }
+  async genererDescription() {
+    this.description = await Chatopenai.generateDescriptionForUniverse(this);
+  }
 
+  get id() {
+    return this._id;
+  }
 
+  get description() {
+    return this._description;
+  }
 
-    get idUnivers(){
-        return this.idUnivers;
-    }   
+  get id_utilisateur() {
+    return this._id_utilisateur;
+  }
 
-    get nom(){
-        return this.nom;
-    }
+  get nom() {
+    return this._nom;
+  }
 
-    get description(){
-        return this.description;
-    }
+  get id_images() {
+    return this._id_images;
+  }
 
-    get nbPersonnage(){
-        return this.nbPersonnage;
-    }
+  get nb_perso() {
+    return this._nb_perso;
+  }
 
-    get idPersonnage(){
-        return this.idPersonnage;
-    }
+  set id(id) {
+    this._id = id;
+  }
 
-    get idImage(){
-        return this.idImage;
-    }
+  set description(description) {
+    this._description = description;
+  }
 
-    set idUnivers(idUnivers){
-        this.idUnivers = idUnivers;
-    }
+  set id_utilisateur(id_utilisateur) {
+    this._id_utilisateur = id_utilisateur;
+  }
 
-    set nom(nom){
-        this.nom = nom;
-    }
+  set nom(nom) {
+    this._nom = nom;
+  }
 
+  set id_images(id_images) {
+    this._id_images = id_images;
+  }
 
-    set description(description){
-        this.description = description;
-    }
+  set nb_perso(nb_perso) {
+    this._nb_perso = nb_perso;
+  }
 
-    set nbPersonnage(nbPersonnage){
-        this.nbPersonnage = nbPersonnage;
-    }
-
-    set idPersonnage(idPersonnage){
-        this.idPersonnage = idPersonnage;
-    }
-
-    set idImage(idImage){
-        this.idImage = idImage;
-    }
-
-getCharacter() {
+  getCharacter() {
     return true;
-}
+  }
 }
 
-
+module.exports = Univers;

@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const port = 3000;
 const router = express.Router();
 const connection = require("./../mysql");
-const Univers= require("../class/univers");
+const Univers = require("../class/univers");
 
 //////////////////////////////////////////////
 //////////////UNIVERS/////////////////////////
@@ -12,8 +12,7 @@ const Univers= require("../class/univers");
 
 //récupération de l'ensemble des univers
 
-exports.getAllUnivers=(req, res) => {
-
+exports.getAllUnivers = (req, res) => {
   connection.query("SELECT * FROM univers", (err, rows, fields) => {
     if (err) throw err;
     res.send(rows);
@@ -22,29 +21,32 @@ exports.getAllUnivers=(req, res) => {
 
 //création d'un univers
 
-exports.addUnivers=(req, res) => {
-  // let univers= Univers.fromMap(req.body); //from map 
-  // univers.genererDescription();
-
-  const universData = req.body;
-  const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
+exports.addUnivers = (req, res) => {
+  let univers= Univers.fromMap(req.body); //from map
+  univers.genererDescription();
+  const values = univers.toMap();
+  // const universData = req.body;
+  const sql =
+    "INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
 
   // const valueUnivers = [univers.description, univers.id_utilisateurs, univers.nom, univers.id_images, univers.nb_perso];
 
-
-  const values = [
-    universData.description,
-    universData.id_utilisateurs,
-    universData.nom,
-    universData.id_images,
-    universData.nb_perso,
-  ];
+  // const values = [
+  //   universData.description,
+  //   universData.id_utilisateurs,
+  //   universData.nom,
+  //   universData.id_images,
+  //   universData.nb_perso,
+  // ];
   console.log(values);
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err);
       res.status(500).json({ error: "Erreur lors de l'insertion" });
     } else {
+
+      // univers.id = result.insertId;
+      //res.status(201).json(univers.toMap());
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json({ message: "Enregistrement inséré avec succès" });
     }
@@ -53,53 +55,76 @@ exports.addUnivers=(req, res) => {
 
 //récupération d'un univers
 
-exports.getUniversById=(req, res) => {
-  let univers= Univers.fromMap(req.body); //from map
-
+exports.getUniversById = (req, res) => {
   connection.query(
     "SELECT * FROM univers WHERE id= ?",
     [req.params.id],
     (err, rows, fields) => {
-      if (err) throw err;
-      res.send(rows);
+      if (err) {
+        res.status(500).json({ error: "Erreur lors de la récupération" })
+      } 
+      else
+      {
+        let universes = [];
+        for (let row of rows) {
+          let universeTemp = Univers.fromMap(row);
+
+          universes.push(universeTemp.toMap());
+        }
+
+        res.status(200).json(universes);
+      }
     }
   );
 };
 
 //Modification d'un univers
 
-exports.updateUnivers=(req, res) => {
-  const body = req.body;
-  const id = req.params.id;
+exports.updateUnivers = (req, res) => {
+  let univers = Univers.fromMap(req.body); //from map
+  let id = req.params.id;
+  let values = [
+    univers.description,
+    univers.id_utilisateur,
+    univers.nom,
+    univers.id_images,
+    univers.nb_perso,
+    id,
+  ];
+  let idUnivers = [univers.id];
+  console.log(idUnivers);
+  // const body = req.body;
+  // const id = req.params.id;
 
   // Utilisez une requête préparée pour mettre à jour les données
   const sql =
     "UPDATE univers SET description = ?, id_utilisateurs = ?, nom = ?, id_images = ?, nb_perso = ? WHERE id = ?";
-  const values = [
-    body.description,
-    body.id_utilisateurs,
-    body.nom,
-    body.id_images,
-    body.nb_perso,
-    id,
-  ];
+  // const values = [
+  //   body.description,
+  //   body.id_utilisateurs,
+  //   body.nom,
+  //   body.id_images,
+  //   body.nb_perso,
+  //   id,
+  // ];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de la mise à jour :", err);
       res.status(500).json({ error: "Erreur lors de la mise à jour" });
     } else {
-      console.log("Enregistrement mis à jour avec succès !");
+      //console.log("Enregistrement mis à jour avec succès !");
       res
         .status(200)
         .json({ message: "Enregistrement mis à jour avec succès" });
+      console.log(values);
     }
   });
 };
 
 //Suppression d'un univers
 
-exports.deleteUnivers=(req, res) => {
+exports.deleteUnivers = (req, res) => {
   const id = req.params.id;
 
   // Utilisez une requête préparée pour supprimer l'enregistrement
@@ -117,8 +142,5 @@ exports.deleteUnivers=(req, res) => {
     }
   });
 };
-
-// const personnageRouter = require("./personnagecontroller");
-// router.use("/:id/personnages", personnageRouter);
 
 module.exports = exports;

@@ -1,74 +1,72 @@
 class Message {
-  constructor(texte, id, isHuman, date, idUtilisateur, idDiscussion) {
-    this.texte = texte;
-    this.id = id;
-    this.isHuman = isHuman;
-    this.date = date;
-    this.idUtilisateur = idUtilisateur;
-    this.idDiscussion = idDiscussion;
-  }
-
-  toMap() {
-    return{
-      id: this.id,
-      texte: this.texte,
-      date: this.date,
-    }
+  constructor(id, isHumain, date_dernier_message, contenu, id_utilisateur){
+    this._id = id;
+    this._isHumain = isHumain;
+    this._date_dernier_message = date_dernier_message;
+    this._contenu = contenu;
+    this._id_utilisateur = id_utilisateur;
   }
 
   static fromMap(map) {
-    this.id = map.id;
-    this.texte = map.texte;
-    this.date = map.date;
+    let message = new Message(map.id);
+    message._id = map.id;
+    message._isHumain = map.isHumain;
+    message._date_dernier_message = map.date_dernier_message;
+    message._contenu = map.contenu;
+    message._id_utilisateur = map.id_utilisateur;
+    return message;
   }
 
-  
-
-  get texte() {
-    return this.texte;
+  toMap() {
+    return {
+      id: this._id,
+      isHumain: this._isHumain,
+      date_dernier_message: this._date_dernier,
+      contenu: this._contenu,
+      id_utilisateur: this._id_utilisateur,
+    };
   }
 
   get id() {
-    return this.id;
+    return this._id;
   }
 
-  get isHuman() {
-    return this.isHuman;
+  get isHumain() {
+    return this._isHumain;
   }
 
-  get date() {
-    return this.date;
+  get date_dernier_message() {
+    return this._date_dernier_message;
   }
 
-  get idUtilisateur() {
-    return this.idUtilisateur;
+  get contenu() {
+    return this._contenu;
   }
 
-  set texte(texte) {
-    this.texte = texte;
+  get id_utilisateur() {
+    return this._id_utilisateur;
   }
 
   set id(id) {
-    this.id = id;
+    this._id = id;
   }
 
-  set isHuman(isHuman) {
-    this.isHuman = isHuman;
+  set isHumain(isHumain) {
+    this._isHumain = isHumain;
   }
 
-  set date(date) {
-    this.date = date;
+  set date_dernier_message(date_dernier) {
+    this._date_dernier_message = date_dernier_message;
   }
 
-  set idUtilisateur(idUtilisateur) {
-    this.idUtilisateur = idUtilisateur;
+  set contenu(contenu) {
+    this._contenu = contenu;
   }
 
-  get idDiscussion() {
-    return this.idDiscussion;
+  set id_utilisateur(id_utilisateur) {
+    this._id_utilisateur = id_utilisateur;
   }
 
-  set idDiscussion(idDiscussion) {
-    this.idDiscussion = idDiscussion;
-  }
+
 }
+module.exports = Message;
