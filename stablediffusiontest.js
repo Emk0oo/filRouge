@@ -12,7 +12,7 @@ formData.append("prompt", prompt);
 let requestOptions = {
     method: "POST",
     headers: {
-        "x-api-key": process.env.CLIPBOARD_KEY,
+        "x-api-key": process.env.CLIPDROP_API_KEY,
     },
     body: formData,
     redirect: "follow",

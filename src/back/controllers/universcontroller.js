@@ -27,6 +27,7 @@ exports.addUnivers = async (req, res) => {
   //const values = univers.toMap();
   await univers.genererDescription();
   // const universData = req.body;
+  await univers.genererImage();
   const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
 
   const values = [

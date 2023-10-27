@@ -34,6 +34,10 @@ class Univers {
     this.description = await Chatopenai.generateDescriptionForUniverse(this);
   }
 
+  async genererImage(){
+    await Chatopenai.generatePicture(this);
+  }
+
   get id() {
     return this._id;
   }

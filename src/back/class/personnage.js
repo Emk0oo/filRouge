@@ -29,6 +29,10 @@ class Personnage {
     };
   }
 
+  async genererPhotoProfil(){
+    await Chatopenai.generatePictureCharacter(this);
+  }
+  
   get id() {
     return this._id;
   }
