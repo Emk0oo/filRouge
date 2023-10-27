@@ -25,7 +25,7 @@ class Chatopenai {
   }
 
   static async generatePicture(univers) {
-    let prompt ="Génère une image pour l'univers de " +univers.nom;
+    let prompt = "Génère une image pour l'univers de " + univers.nom;
     let formData = new FormData();
     formData.append("prompt", prompt);
 
@@ -40,7 +40,7 @@ class Chatopenai {
     fetch(iaUrl, requestOptions).then((response) => {
       response.arrayBuffer().then((buffer) => {
         let outputName = Math.random().toString(36) + ".png";
-        fs.writeFile( outputName, Buffer.from(buffer), () => {
+        fs.writeFile(outputName, Buffer.from(buffer), () => {
           console.log("Saved output to ./output/" + outputName);
           console.log(process.env.CLIPDROP_API_KEY);
         });
@@ -49,7 +49,7 @@ class Chatopenai {
   }
 
   static async generatePictureCharacter(personnage) {
-    let prompt ="Génère une photo de profil de " +personnage.nom;
+    let prompt = "Génère une photo de profil de " + personnage.nom;
     let formData = new FormData();
     formData.append("prompt", prompt);
 
@@ -64,14 +64,13 @@ class Chatopenai {
     fetch(iaUrl, requestOptions).then((response) => {
       response.arrayBuffer().then((buffer) => {
         let outputName = Math.random().toString(36) + ".png";
-        fs.writeFile( outputName, Buffer.from(buffer), () => {
+        fs.writeFile(outputName, Buffer.from(buffer), () => {
           console.log("Saved output to ./output/" + outputName);
           console.log(process.env.CLIPDROP_API_KEY);
         });
       });
     });
   }
-
 }
 
 module.exports = Chatopenai;
