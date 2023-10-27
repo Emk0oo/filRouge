@@ -21,31 +21,30 @@ exports.getAllUnivers = (req, res) => {
 
 //création d'un univers
 
-exports.addUnivers = (req, res) => {
-  let univers= Univers.fromMap(req.body); //from map
-  univers.genererDescription();
-  const values = univers.toMap();
+exports.addUnivers = async (req, res) => {
+  let univers= Univers.fromMap(req.body);
+  console.log(req.body); //from map
+  //const values = univers.toMap();
+  await univers.genererDescription();
   // const universData = req.body;
-  const sql =
-    "INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
+  const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
 
-  // const valueUnivers = [univers.description, univers.id_utilisateurs, univers.nom, univers.id_images, univers.nb_perso];
-
-  // const values = [
-  //   universData.description,
-  //   universData.id_utilisateurs,
-  //   universData.nom,
-  //   universData.id_images,
-  //   universData.nb_perso,
-  // ];
-  console.log(values);
+  const values = [
+    univers.description.trim(),
+    univers.id_utilisateur,
+    univers.nom,
+    univers.id_images,
+    univers.nb_perso,
+  ]
+  
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err);
       res.status(500).json({ error: "Erreur lors de l'insertion" });
+      console.log(univers.description);
     } else {
 
-      // univers.id = result.insertId;
+      univers.id = result.insertId;
       //res.status(201).json(univers.toMap());
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json({ message: "Enregistrement inséré avec succès" });
@@ -60,20 +59,13 @@ exports.getUniversById = (req, res) => {
     "SELECT * FROM univers WHERE id= ?",
     [req.params.id],
     (err, rows, fields) => {
-      if (err) {
-        res.status(500).json({ error: "Erreur lors de la récupération" })
-      } 
-      else
-      {
+      if (err) res.status(500).json({ error: "Erreur lors de la récupération" });
         let universes = [];
         for (let row of rows) {
           let universeTemp = Univers.fromMap(row);
-
           universes.push(universeTemp.toMap());
         }
-
         res.status(200).json(universes);
-      }
     }
   );
 };

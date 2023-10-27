@@ -11,7 +11,7 @@ class Univers {
   }
 
   static fromMap(map) {
-    let univers = new Univers(map.nom);
+    let univers = new Univers(map.id);
     univers._description = map.description;
     univers._id_utilisateur = map.id_utilisateur;
     univers._nom = map.nom;

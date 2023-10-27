@@ -12,10 +12,7 @@ const Utilisateur = require("../class/utilisateur");
 
 exports.addUser = (req, res) => {
   let utilisateur = Utilisateur.fromMap(req.body); //from map
-  //const userData = req.body;
-  const sql =
-    "INSERT INTO utilisateurs (nom, prenom, pseudo, mdp, id_message) VALUES (?, ?, ?, ?, ?)";
-
+  const sql ="INSERT INTO utilisateurs (nom, prenom, pseudo, mdp, id_message) VALUES (?, ?, ?, ?, ?)";
   const values = [
     utilisateur.nom,
     utilisateur.prenom,
@@ -23,24 +20,16 @@ exports.addUser = (req, res) => {
     utilisateur.mdp,
     utilisateur.id_message,
   ];
-
-  // const values = [
-  //   // userData.id, remetrre id dans requete si marche pas
-  //   userData.nom,
-  //   userData.prenom,
-  //   userData.pseudo,
-  //   userData.mdp,
-  //   userData.id_message,
-  // ];
-
+  // const values= utilisateur.toMap();
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err);
       res.status(500).json({ error: "Erreur lors de l'insertion" });
-    } else {
+      console.log(values);
+    }
+     utilisateur.id= result.insertId;
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json(utilisateur.toMap());
-    }
   });
 };
 
@@ -68,21 +57,25 @@ exports.getUserById = (req, res) => {
     "SELECT * FROM utilisateurs WHERE id= ?",
     [req.params.id],
     (err, rows, fields) => {
-      if (err) {
-        throw err;
-      } else {
-        let utilisateur = [];
-        for (let row of rows) {
-          let utilisateurTemp = Utilisateur.fromMap(row);
-
-          utilisateur.push(utilisateurTemp.toMap());
-        }
-
-        res.status(200).json(utilisateur);
-        //res.send(rows);
+      if(err) throw err;
+      let utilisateur = [];
+      for (let row of rows) {
+        let utilisateurTemp = Utilisateur.fromMap(row);
+        utilisateur.push(utilisateurTemp.toMap());
       }
+      res.status(200).json(utilisateur);
     }
-  );
-};
-
+    );
+  };
+  // if (err) {
+  //   throw err;
+  // } else {
+  //     let utilisateur = [];
+  //   for (let row of rows) {
+  //       let utilisateurTemp = Utilisateur.fromMap(row);
+  //     utilisateur.push(utilisateurTemp.toMap());
+  //   }
+  //   res.status(200).json(utilisateur);
+  // }
+  
 module.exports = exports;

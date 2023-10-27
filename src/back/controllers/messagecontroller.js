@@ -22,12 +22,9 @@ exports.getMessage = (req, res) => {
   connection.query(sql, values, (err, rows, fields) => {
     if (err) {
       console.error("Erreur lors de la récupération des messages :", err);
-      res
-        .status(500)
-        .json({ error: "Erreur lors de la récupération des messages" });
-    } else {
-      res.status(200).json(rows);
+      res.status(500).json({ error: "Erreur lors de la récupération des messages" });
     }
+      res.status(200).json(rows);
   });
 };
 
