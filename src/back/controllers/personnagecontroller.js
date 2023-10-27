@@ -29,9 +29,9 @@ exports.getAllPersonnages = (req, res) => {
 
 //Création d'un personnage dans un univers
 
-exports.addPersonnage = (req, res) => {
+exports.addPersonnage = async (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
-
+  await personnage.genererPhotoProfil();
   //const personnagesData = req.body;
   let sql =
     "INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES (?, ?, ?, ?)";
