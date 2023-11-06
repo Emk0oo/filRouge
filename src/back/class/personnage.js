@@ -1,12 +1,12 @@
 const Chatopenai = require("./chatopenai");
+const StableDiffusion= require("./stablediffusion");
 
 class Personnage {
-  constructor(id, nom, description, id_images, id_messages, id_univers) {
+  constructor(id, nom, description, id_images, id_univers) {
     this._id = id;
     this._nom = nom;
     this._description = description;
     this._id_images = id_images;
-    this._id_messages = id_messages;
     this._id_univers = id_univers;
   }
 
@@ -15,7 +15,6 @@ class Personnage {
     personnage._nom = map.nom;
     personnage._description = map.description;
     personnage._id_images = map.id_images;
-    personnage._id_messages = map.id_messages;
     personnage._id_univers = map.id_univers;
     return personnage;
   }
@@ -26,13 +25,19 @@ class Personnage {
       nom: this._nom,
       description: this._description,
       id_images: this._id_images,
-      id_messages: this._id_messages,
       id_univers: this._id_univers,
     };
   }
 
+  async genererDescription() {
+    this.description = await Chatopenai.generateDescriptionForCharacter(this);
+  }
+
+
   async genererPhotoProfil(){
-    await Chatopenai.generatePictureCharacter(this);
+    let stableDiffusion= new StableDiffusion();
+
+    this.id_images= await StableDiffusion.generatePicture(await Chatopenai.generateDescriptionForCharacter(this));
   }
   
   get id() {
@@ -51,9 +56,7 @@ class Personnage {
     return this._id_images;
   }
 
-  get id_messages() {
-    return this._id_messages;
-  }
+
 
   get id_univers() {
     return this._id_univers;
@@ -75,9 +78,6 @@ class Personnage {
     this._id_images = id_images;
   }
 
-  set id_messages(id_messages) {
-    this._id_messages = id_messages;
-  }
 
   set id_univers(id_univers) {
     this._id_univers = id_univers;

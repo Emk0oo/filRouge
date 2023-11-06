@@ -1,4 +1,5 @@
 const Chatopenai = require("./chatopenai");
+const StableDiffusion= require("./stablediffusion");
 
 class Univers {
   constructor(id, description, id_utilisateur, nom, id_images, nb_perso) {
@@ -35,7 +36,9 @@ class Univers {
   }
 
   async genererImage(){
-    await Chatopenai.generatePicture(this);
+    let stableDiffusion= new StableDiffusion();
+
+    this.id_images= await StableDiffusion.generatePicture(await Chatopenai.generateDescriptionForUniverse(this));
   }
 
   get id() {

@@ -5,6 +5,7 @@ const port = 3000;
 //const router = express.Router();
 const connection = require("../mysql");
 const Personnage = require("../class/personnage");
+const Image = require("../class/image");
 
 //Récupération de l'ensemble des personnages d'un univers
 
@@ -31,26 +32,17 @@ exports.getAllPersonnages = (req, res) => {
 
 exports.addPersonnage = async (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
+  await personnage.genererDescription();
   await personnage.genererPhotoProfil();
-  //const personnagesData = req.body;
-
-  let sqlImage= "INSERT INTO images (url) VALUES (?)";
 
   let sql =
-    "INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES (?, ?, ?, ?)";
+    "INSERT INTO personnages (nom, description, id_images) VALUES (?, ?, ?)";
   const values = [
     personnage.nom,
+    personnage.description.trim(),
     personnage.id_images,
-    personnage.id_messages,
-    personnage.id_univers,
   ];
 
-  // const values = [
-  //   personnagesData.nom,
-  //   personnagesData.id_images,
-  //   personnagesData.id_messages,
-  //   personnagesData.id_univers,
-  // ];
   console.log(values);
   connection.query(sql, values, (err, result) => {
     if (err) {
@@ -58,6 +50,7 @@ exports.addPersonnage = async (req, res) => {
       res.status(500).json({ error: "Erreur lors de l'insertion" });
     } else {
       personnage.id = result.insertId;
+      personnage.id_univers= req.params.id;
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json(personnage.toMap());
     }
@@ -72,11 +65,10 @@ exports.updatePersonnage = (req, res) => {
   const idCharacter = req.params.idCharacter; //req.params.id;
   //const personnagesData = req.body;
   let sql =
-    "UPDATE personnages SET nom = ?, id_images = ?, id_messages = ?, id_univers = ? WHERE id = ?";
+    "UPDATE personnages SET nom = ?, id_images = ?, id_univers = ? WHERE id = ?";
   const values = [
     personnage.nom,
     personnage.id_images,
-    personnage.id_messages,
     personnage.id_univers,
     idCharacter,
   ];

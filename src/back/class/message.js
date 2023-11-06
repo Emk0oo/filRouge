@@ -1,10 +1,11 @@
 class Message {
-  constructor(id, isHumain, date_dernier_message, contenu, id_utilisateur){
+  constructor(id, isHumain, date_dernier_message, contenu, id_utilisateur, id_personnage){
     this._id = id;
     this._isHumain = isHumain;
     this._date_dernier_message = date_dernier_message;
     this._contenu = contenu;
     this._id_utilisateur = id_utilisateur;
+    this._id_personnage = id_personnage;
   }
 
   static fromMap(map) {
@@ -14,6 +15,7 @@ class Message {
     message._date_dernier_message = map.date_dernier_message;
     message._contenu = map.contenu;
     message._id_utilisateur = map.id_utilisateur;
+    message._id_personnage = map.id_personnage;
     return message;
   }
 
@@ -24,6 +26,7 @@ class Message {
       date_dernier_message: this._date_dernier,
       contenu: this._contenu,
       id_utilisateur: this._id_utilisateur,
+      id_personnage: this._id_personnage,
     };
   }
 
