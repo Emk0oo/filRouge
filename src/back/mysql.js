@@ -2,7 +2,7 @@ const mysql = require("mysql2");
 
 class MysqlSingleton{
   static instance;
-
+  
   static getInstance(){
     if(!MysqlSingleton.instance){
       MysqlSingleton.instance= mysql.createConnection({
