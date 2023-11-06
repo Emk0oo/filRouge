@@ -40,7 +40,7 @@ class Chatopenai {
     fetch(iaUrl, requestOptions).then((response) => {
       response.arrayBuffer().then((buffer) => {
         let outputName = Math.random().toString(36) + ".png";
-        fs.writeFile(outputName, Buffer.from(buffer), () => {
+        fs.writeFile("./src/back/output/imageUnivers/"+outputName, Buffer.from(buffer), () => {
           console.log("Saved output to ./output/" + outputName);
           console.log(process.env.CLIPDROP_API_KEY);
         });
@@ -64,9 +64,9 @@ class Chatopenai {
     fetch(iaUrl, requestOptions).then((response) => {
       response.arrayBuffer().then((buffer) => {
         let outputName = Math.random().toString(36) + ".png";
-        fs.writeFile(outputName, Buffer.from(buffer), () => {
-          console.log("Saved output to ./output/" + outputName);
-          console.log(process.env.CLIPDROP_API_KEY);
+        fs.writeFile("./src/back/output/imagePersonnage/"+ outputName, Buffer.from(buffer), () => {
+          console.log("Saved output to ./src/back/output/imagePersonnage/" + outputName);
+          // console.log(process.env.CLIPDROP_API_KEY);
         });
       });
     });

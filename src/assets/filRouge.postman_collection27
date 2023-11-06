@@ -1,0 +1,563 @@
+{
+	"info": {
+		"_postman_id": "56c5d733-6bbc-4bb9-9927-4cf7a113e811",
+		"name": "filRouge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29804840"
+	},
+	"item": [
+		{
+			"name": "Univers",
+			"item": [
+				{
+					"name": "Créer univers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_utilisateurs\": 1,\r\n    \"nom\": \"Pokemon\",\r\n    \"id_images\": 9,\r\n    \"nb_perso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ALL Univers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Univers by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MAJ Univers",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"ogre qui vit dans le marais\",\r\n    \"id_utilisateurs\": 1,\r\n    \"nom\": \"Shrek\",\r\n    \"id_images\": 2,\r\n    \"nb_perso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/update/10",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"update",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Univers by id ",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/delete/11",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"delete",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personnage",
+			"item": [
+				{
+					"name": "Creer personnage univers by id ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"yoda\",\r\n    \"id_images\": 1,\r\n    \"id_messages\": 1,\r\n    \"id_univers\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/1/characters",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ALL personnages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/personnages",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"personnages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modif perso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/univers/1/characters/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete perso",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/univers/1/characters/11/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters",
+								"11",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Creer utilisateur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Javor\",\r\n    \"prenom\": \"Emirrr\",\r\n    \"pseudo\": \"EJRRR\",\r\n    \"mdp\": \"abc\",\r\n    \"id_message\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update utilisateur",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/update/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get utilisateur by id ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ALL utilisateur",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Get message by user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/3/messages/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"3",
+								"messages",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post message user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contenue\": \"abcdefg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/4/messages/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"4",
+								"messages",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "test ello",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/hello",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"nom\": \"clouet\",\r\n    \"id_images\": 1,\r\n    \"id_messages\": 1,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/personnages/add",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"personnages",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

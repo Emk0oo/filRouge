@@ -1,3 +1,5 @@
+const Chatopenai = require("./chatopenai");
+
 class Personnage {
   constructor(id, nom, description, id_images, id_messages, id_univers) {
     this._id = id;

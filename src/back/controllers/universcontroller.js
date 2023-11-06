@@ -46,7 +46,6 @@ exports.addUnivers = async (req, res) => {
     } else {
 
       univers.id = result.insertId;
-      //res.status(201).json(univers.toMap());
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json({ message: "Enregistrement inséré avec succès" });
     }

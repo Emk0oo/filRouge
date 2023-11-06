@@ -33,6 +33,9 @@ exports.addPersonnage = async (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
   await personnage.genererPhotoProfil();
   //const personnagesData = req.body;
+
+  let sqlImage= "INSERT INTO images (url) VALUES (?)";
+
   let sql =
     "INSERT INTO personnages (nom, id_images, id_messages, id_univers) VALUES (?, ?, ?, ?)";
   const values = [
@@ -54,6 +57,7 @@ exports.addPersonnage = async (req, res) => {
       console.error("Erreur lors de l'insertion :", err);
       res.status(500).json({ error: "Erreur lors de l'insertion" });
     } else {
+      personnage.id = result.insertId;
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json(personnage.toMap());
     }
