@@ -5,13 +5,15 @@ const port = 3000;
 // const router= express.Router();
 const connection = require("./../mysql");
 const Message = require("../class/message");
-
+const env = require("dotenv").config();
+const jwt = require("jsonwebtoken");
 //////////////////////////////////////////////
 //////////////MESSAGES////////////////////////
 //////////////////////////////////////////////
 
 //récupération message user
 exports.getMessage = (req, res) => {
+  
   const idMessage = req.originalUrl.split("/")[2];
   const sql = `SELECT m.contenu, m.id FROM messages m JOIN utilisateurs u on u.id_message=m.id WHERE u.id = ?`;
   const values = [idMessage];
@@ -47,24 +49,25 @@ exports.getMessage = (req, res) => {
 // };
 
 exports.addMessage = (req, res) => {
+  var tokenBearer=req.headers.authorization;  
+  var token=tokenBearer.split(" ")[1]; // on récupère le token sans le bearer
+  const secretkey= process.env.SECRET_KEY; 
+  var decoded = jwt.verify(token, secretkey); // on décode le token
+  var idUser=decoded.id;
+  var isHumain= true;
+
   let message = Message.fromMap(req.body);
   //const userData = req.body;
-  const idUser = req.originalUrl.split("/")[2];
+  // const idUser = req.originalUrl.split("/")[2];
   const sql =
     "INSERT INTO messages (isHumain, date_dernier_message, contenu, id_utilisateur, id_personnage) VALUES (?, ?, ?, ?, ?) ";
   const values = [
-    message.isHumain,
+    isHumain,
     message.date_dernier_message,
     message.contenu,
     idUser,
     message.id_personnage
   ];
-  // const values = [
-  //   userData.isHumain,
-  //   userData.date_dernier_message,
-  //   userData.contenu,
-  //   idUser,
-  // ];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
