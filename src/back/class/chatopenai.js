@@ -1,6 +1,7 @@
 const Openai = require("openai");
 const fs = require("fs");
 const connection = require("../mysql");
+const Message = require("./message");
 
 const openAiObject = new Openai({
   apiKey: process.env.OPENAI_API_KEY,
@@ -51,16 +52,16 @@ class Chatopenai {
       personnage.nom +
       ". Le prompt doit être en anglais de moins de 500 charactères.";
 
-      let reponse= await openAiObject.completions.create({
-        model: "davinci",
-        prompt: prompt,
-        temperature: 0.9,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
-      return reponse.choices[0].text;
+    let reponse = await openAiObject.completions.create({
+      model: "davinci",
+      prompt: prompt,
+      temperature: 0.9,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    return reponse.choices[0].text;
   }
 
   static async generatePicture(univers) {
@@ -91,51 +92,71 @@ class Chatopenai {
     });
   }
 
-  // static async generatePictureCharacter(personnage) {
-  //   let prompt = "Génère une photo de profil de " + personnage.nom;
-  //   let formData = new FormData();
-  //   formData.append("prompt", prompt);
+  static async generateResponseForMessage(idUser, idPersonnage) {
+    return new Promise((resolve, reject) => {
+      const sql =
+        "SELECT m.contenu, m.isHumain, p.nom FROM `messages` m INNER JOIN personnages p on m.id_personnage=p.id WHERE m.id_utilisateur=? AND m.id_personnage=? ORDER BY m.`date_dernier_message` ASC;";
+      const values = [idUser, idPersonnage];
+      console.log(sql, values);
 
-  //   let requestOptions = {
-  //     method: "POST",
-  //     headers: {
-  //       "x-api-key": process.env.CLIPDROP_API_KEY,
-  //     },
-  //     body: formData,
-  //     redirect: "follow",
-  //   };
-  //   fetch(iaUrl, requestOptions).then((response) => {
-  //     response.arrayBuffer().then((buffer) => {
-  //       let outputName = Math.random().toString(36) + ".png";
-  //       fs.writeFile(
-  //         "./src/back/output/imagePersonnage/" + outputName,
-  //         Buffer.from(buffer),
-  //         () => {
-  //           console.log(
-  //             "Saved output to ./src/back/output/imagePersonnage/" + outputName
-  //           );
-  //         }
-  //       );
-  //     });
-  //   });
+      connection.query(sql, values, async (err, rows, fields) => {
+        if (err) {
+          console.error("Erreur lors de la récupération des messages :", err);
+          res
+            .status(500)
+            .json({ error: "Erreur lors de la récupération des messages" });
+          return;
+        }
+        let tabMessage = [];
 
-  //   // let sql= "INSERT INTO images (id_personnage, url) VALUES (?, ?)";
-  //   // const values = [
-  //   //   personnage.id,
-  //   //   outputName,
-  //   // ];
+        for (let row of rows) {
+          let prefix = null;
+          let i = 0;
+          if (i == 0) {
+            prefix =
+              "Dans le cadre d'un jeu rôle tu prends le rôle de " +
+              row.nom +
+              " dans le but de faire conversation avec l'utilisateur de l'application.";
+            i++;
+          }
+          let monMessage = Message.fromMap(row);
+          var format = {
+            role: monMessage.isHumain ? "user" : "assistant",
+            content: prefix + monMessage._contenu,
+          };
+          tabMessage.push(format);
+        }
+        console.log(tabMessage);
 
-  //   // connection.query(sql, values, (err, result) => {
-  //   //   if (err) {
-  //   //     console.error("Erreur lors de l'insertion :", err);
-  //   //     res.status(500).json({ error: "Erreur lors de l'insertion" });
-  //   //   } else {
+        const openai = new Openai({
+          apiKey: process.env.OPENAI_API_KEY,
+        });
+        const response = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo", // "gpt-4"
+          messages: tabMessage,
+          temperature: 1,
+          max_tokens: 256,
+          top_p: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
+        });
+        console.log(response.choices[0].message.content);
+        let messageUtilisateur = new Message();
+        console.log("là");
+        messageUtilisateur.contenu = response.choices[0].message.content;
+        messageUtilisateur.isHumain = false;
+        messageUtilisateur._id_personnage = idPersonnage;
+        messageUtilisateur.id_utilisateur = idUser;
+        
+        
+        
+        resolve(messageUtilisateur);
 
-  //   //     console.log("Enregistrement inséré avec succès !");
-  //   //     // res.status(200).json(personnage.toMap());
-  //   //   }
-  //   // });
-  // }
+      });//query premiere
+
+    });//promise
+
+  }//function
 }
 
 module.exports = Chatopenai;

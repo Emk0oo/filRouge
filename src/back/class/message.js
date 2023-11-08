@@ -21,9 +21,7 @@ class Message {
 
   toMap() {
     return {
-      id: this._id,
       isHumain: this._isHumain,
-      date_dernier_message: this._date_dernier,
       contenu: this._contenu,
       id_utilisateur: this._id_utilisateur,
       id_personnage: this._id_personnage,
