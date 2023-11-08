@@ -43,15 +43,17 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
   3. Insérer les clés API :
      * [OpenAI](https://platform.openai.com/docs/quickstart?context=python)
      * [ClipDrop](https://clipdrop.co/apis/docs/text-to-image)
+  4. Insérer les identifiants de la BDD MySQL
 
-
-
-   
   
 
 
 ## Lancement
 
-
+ 1. Vérifier la disponibilité du port 3000
+ 2. Lancer l'application
+    ```bash
+    node api.js
+    ```
 
 ## Utilisation
