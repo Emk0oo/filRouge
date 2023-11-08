@@ -45,9 +45,6 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
      * [ClipDrop](https://clipdrop.co/apis/docs/text-to-image)
   4. Insérer les identifiants de la BDD MySQL
 
-  
-
-
 ## Lancement
 
  1. Vérifier la disponibilité du port 3000
