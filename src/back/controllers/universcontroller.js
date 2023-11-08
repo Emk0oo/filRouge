@@ -24,9 +24,7 @@ exports.getAllUnivers = (req, res) => {
 exports.addUnivers = async (req, res) => {
   let univers = Univers.fromMap(req.body);
   console.log(req.body); //from map
-  //const values = univers.toMap();
   await univers.genererDescription();
-  // const universData = req.body;
   await univers.genererImage();
   const sql =
     "INSERT INTO univers (description, id_utilisateurs, nom, id_images) VALUES (?, ?, ?, ?)";
@@ -46,7 +44,7 @@ exports.addUnivers = async (req, res) => {
     } else {
       univers.id = result.insertId;
       console.log("Enregistrement inséré avec succès !");
-      res.status(200).json({ message: "Enregistrement inséré avec succès" });
+      res.status(201).json({ message: "Enregistrement inséré avec succès" });
     }
   });
 };
@@ -84,9 +82,6 @@ exports.updateUnivers = (req, res) => {
   ];
   let idUnivers = [univers.id];
   console.log(idUnivers);
-  // const body = req.body;
-  // const id = req.params.id;
-
   // Utilisez une requête préparée pour mettre à jour les données
   const sql =
     "UPDATE univers SET description = ?, id_utilisateurs = ?, nom = ?, id_images = ? WHERE id = ?";

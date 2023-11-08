@@ -19,7 +19,6 @@ exports.addUser = (req, res) => {
     utilisateur.pseudo,
     utilisateur.mdp,
   ];
-  // const values= utilisateur.toMap();
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err);
@@ -28,14 +27,12 @@ exports.addUser = (req, res) => {
     }
      utilisateur.id= result.insertId;
       console.log("Enregistrement inséré avec succès !");
-      res.status(200).json(utilisateur.toMap());
+      res.status(201).json(utilisateur.toMap());
   });
 };
 
 exports.updateUser = (req, res) => {
   let utilisateur = Utilisateur.fromMap(req.body); //from map
-  // let body = req.body;
-  // const data = req.body;
   const requete = `UPDATE utilisateurs SET nom = '${utilisateur.nom}', prenom = '${utilisateur.prenom}', pseudo = '${utilisateur.pseudo}', mdp = '${utilisateur.mdp}' WHERE id = '${req.params.id}'`;
   connection.query(requete, function (err, result) {
     if (err) throw err;
@@ -66,15 +63,6 @@ exports.getUserById = (req, res) => {
     }
     );
   };
-  // if (err) {
-  //   throw err;
-  // } else {
-  //     let utilisateur = [];
-  //   for (let row of rows) {
-  //       let utilisateurTemp = Utilisateur.fromMap(row);
-  //     utilisateur.push(utilisateurTemp.toMap());
-  //   }
-  //   res.status(200).json(utilisateur);
-  // }
+
   
 module.exports = exports;

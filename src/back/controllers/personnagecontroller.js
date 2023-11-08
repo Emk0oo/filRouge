@@ -34,7 +34,6 @@ exports.addPersonnage = async (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
   await personnage.genererDescription();
   await personnage.genererPhotoProfil();
-
   let sql =
     "INSERT INTO personnages (nom, description, id_images) VALUES (?, ?, ?)";
   const values = [
@@ -42,7 +41,6 @@ exports.addPersonnage = async (req, res) => {
     personnage.description.trim(),
     personnage.id_images,
   ];
-
   console.log(values);
   connection.query(sql, values, (err, result) => {
     if (err) {
@@ -52,7 +50,7 @@ exports.addPersonnage = async (req, res) => {
       personnage.id = result.insertId;
       personnage.id_univers = req.params.id;
       console.log("Enregistrement inséré avec succès !");
-      res.status(200).json(personnage.toMap());
+      res.status(201).json(personnage.toMap());
     }
   });
 };
@@ -61,10 +59,8 @@ exports.addPersonnage = async (req, res) => {
 
 exports.updatePersonnage = (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
-  //const id = req.originalUrl.split("/")[2];
   const idCharacter = req.params.idCharacter; //req.params.id;
   console.log(idCharacter);
-  //const personnagesData = req.body;
   let sql =
     "UPDATE personnages SET nom = ?, id_images = ?, id_univers = ? WHERE id = ?";
   const values = [
@@ -73,14 +69,6 @@ exports.updatePersonnage = (req, res) => {
     personnage.id_univers,
     idCharacter,
   ];
-
-  // const values = [
-  //   personnagesData.nom,
-  //   personnagesData.id_images,
-  //   personnagesData.id_messages,
-  //   personnagesData.id_univers,
-  //   idCharacter,
-  // ];
   console.log(values);
   connection.query(sql, values, (err, result) => {
     if (err) {

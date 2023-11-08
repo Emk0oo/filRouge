@@ -62,7 +62,10 @@ exports.addMessage = async (req, res) => {
 
     // Generate response and perform the second database insert
     let idPersonnage = message._id_personnage;
-    var reponse = await Chatopenai.generateResponseForMessage(idUser, idPersonnage);
+    var reponse = await Chatopenai.generateResponseForMessage(
+      idUser,
+      idPersonnage
+    );
     console.log(reponse);
 
     const sql2 =
@@ -86,8 +89,7 @@ exports.addMessage = async (req, res) => {
       });
     });
 
-    res.status(200).json({ message: "Enregistrement inséré avec succès" });
-
+    res.status(201).json({ message: "Enregistrement inséré avec succès" });
   } catch (error) {
     res.status(500).json({ error: "Erreur lors de l'insertion" });
   }
