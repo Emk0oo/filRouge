@@ -1,5 +1,5 @@
 const Chatopenai = require("./chatopenai");
-const StableDiffusion= require("./stablediffusion");
+const StableDiffusion = require("./stablediffusion");
 
 class Univers {
   constructor(id, description, id_utilisateur, nom, id_images, nb_perso) {
@@ -20,7 +20,7 @@ class Univers {
     univers._nb_perso = map.nb_perso;
     return univers;
   }
-  
+
   toMap() {
     return {
       id: this._id,
@@ -36,10 +36,12 @@ class Univers {
     this.description = await Chatopenai.generateDescriptionForUniverse(this);
   }
 
-  async genererImage(){
-    let stableDiffusion= new StableDiffusion();
+  async genererImage() {
+    let stableDiffusion = new StableDiffusion();
 
-    this.id_images= await StableDiffusion.generatePicture(await Chatopenai.generateDescriptionForUniverse(this));
+    this.id_images = await StableDiffusion.generatePicture(
+      await Chatopenai.generateDescriptionForUniverse(this)
+    );
   }
 
   get id() {

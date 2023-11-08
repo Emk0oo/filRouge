@@ -50,7 +50,7 @@ exports.addPersonnage = async (req, res) => {
       res.status(500).json({ error: "Erreur lors de l'insertion" });
     } else {
       personnage.id = result.insertId;
-      personnage.id_univers= req.params.id;
+      personnage.id_univers = req.params.id;
       console.log("Enregistrement inséré avec succès !");
       res.status(200).json(personnage.toMap());
     }
