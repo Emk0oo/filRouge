@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "56c5d733-6bbc-4bb9-9927-4cf7a113e811",
+		"name": "filRouge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29804840"
+	},
+	"item": [
+		{
+			"name": "Univers",
+			"item": [
+				{
+					"name": "Créer un univers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_utilisateur\": 5,\r\n    \"nom\": \"Battlestar Galactica\",\r\n    \"nb_perso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mise à jour d'un univers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"ogreee qui vit dans le marais\",\r\n    \"id_utilisateurs\": 1,\r\n    \"nom\": \"Shrek\",\r\n    \"id_images\": 2,\r\n    \"nb_perso\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/update/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer tous les univers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer  un univers (par son id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un univers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/delete/13",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"delete",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Créer un token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"EJ\", \r\n    \"password\": \"azerty\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creer utilisateur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Javor\",\r\n    \"prenom\": \"Elmir\",\r\n    \"pseudo\": \"ElJ\",\r\n    \"mdp\": \"abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mise à jour d'un utilisateur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Javor\",\r\n    \"prenom\": \"Elmir\",\r\n    \"pseudo\": \"ELmiJav\",\r\n    \"mdp\": \"cba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/update/15",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"update",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer  un utilisateur (par son id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer tous les utilisateurs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personnage",
+			"item": [
+				{
+					"name": "Créer personnage dans un univers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Amiral Adama\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/35/characters/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"35",
+								"characters",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modif perso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Obi Wan Kenobi\",\r\n    \"id_images\": 0,\r\n    \"id_univers\": 1,\r\n    \"description\": \"Jedi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/1/characters/4/update",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters",
+								"4",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer tous les personnages d'un univers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nom\": \"Plouet\",\r\n    \"prenom\": \"Melina\",\r\n    \"pseudo\": \"PM\",\r\n    \"mdp\": \"cba\",\r\n    \"id_message\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/univers/1/characters/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete perso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/univers/1/characters/14/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"univers",
+								"1",
+								"characters",
+								"14",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Récupérer tous les messages d'un utilisateur",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"url\": \"www.abcd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/5/messages/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"5",
+								"messages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Envoyer un message à un personnage",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibm9tIjoiQ2xvdWV0IiwiaWF0IjoxNjk4MjI2NTg2fQ.HMfzcRP34_qm8ltj7QCi_oBBKCpGTmoUeo-xuowji7Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contenu\": \"Comment tu vas ?\",\r\n    \"id_personnage\": 34\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/utilisateurs/4/messages/new",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"utilisateurs",
+								"4",
+								"messages",
+								"new"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
