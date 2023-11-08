@@ -17,7 +17,7 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
 
 
 ## Installation
- - Instruction de mise en place du code:
+*Instruction de mise en place du code*
 
   1. Cloner le dépot
   ```bash
