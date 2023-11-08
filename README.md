@@ -39,9 +39,10 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
 *Mise en place de l'environnement* 
 
   1. Créer le fichier .env à l'aide du .env-example
-  2. Insérer les clés API :
-     * OpenAI
-     * StableDiffusion
+  2. Créer une secret key pour la création du token
+  3. Insérer les clés API :
+     * [OpenAI](https://platform.openai.com/docs/quickstart?context=python)
+     * [ClipDrop](https://clipdrop.co/apis/docs/text-to-image)
 
 
 
