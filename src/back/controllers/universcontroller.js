@@ -28,14 +28,13 @@ exports.addUnivers = async (req, res) => {
   await univers.genererDescription();
   // const universData = req.body;
   await univers.genererImage();
-  const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images, nb_perso) VALUES (?, ?, ?, ?, ?)";
+  const sql ="INSERT INTO univers (description, id_utilisateurs, nom, id_images) VALUES (?, ?, ?, ?)";
 
   const values = [
     univers.description.trim(),
     univers.id_utilisateur,
     univers.nom,
     univers.id_images,
-    univers.nb_perso,
   ]
   
   connection.query(sql, values, (err, result) => {
@@ -80,7 +79,6 @@ exports.updateUnivers = (req, res) => {
     univers.id_utilisateur,
     univers.nom,
     univers.id_images,
-    univers.nb_perso,
     id,
   ];
   let idUnivers = [univers.id];
@@ -90,7 +88,7 @@ exports.updateUnivers = (req, res) => {
 
   // Utilisez une requête préparée pour mettre à jour les données
   const sql =
-    "UPDATE univers SET description = ?, id_utilisateurs = ?, nom = ?, id_images = ?, nb_perso = ? WHERE id = ?";
+    "UPDATE univers SET description = ?, id_utilisateurs = ?, nom = ?, id_images = ? WHERE id = ?";
 
   connection.query(sql, values, (err, result) => {
     if (err) {
@@ -110,11 +108,9 @@ exports.updateUnivers = (req, res) => {
 
 exports.deleteUnivers = (req, res) => {
   const id = req.params.id;
-
   // Utilisez une requête préparée pour supprimer l'enregistrement
   const sql = "DELETE FROM univers WHERE id = ?";
   const values = [id];
-
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error("Erreur lors de la suppression :", err);
