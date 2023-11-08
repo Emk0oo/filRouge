@@ -12,13 +12,12 @@ const Utilisateur = require("../class/utilisateur");
 
 exports.addUser = (req, res) => {
   let utilisateur = Utilisateur.fromMap(req.body); //from map
-  const sql ="INSERT INTO utilisateurs (nom, prenom, pseudo, mdp, id_message) VALUES (?, ?, ?, ?, ?)";
+  const sql ="INSERT INTO utilisateurs (nom, prenom, pseudo, mdp) VALUES (?, ?, ?, ?)";
   const values = [
     utilisateur.nom,
     utilisateur.prenom,
     utilisateur.pseudo,
     utilisateur.mdp,
-    utilisateur.id_message,
   ];
   // const values= utilisateur.toMap();
   connection.query(sql, values, (err, result) => {
@@ -37,7 +36,7 @@ exports.updateUser = (req, res) => {
   let utilisateur = Utilisateur.fromMap(req.body); //from map
   // let body = req.body;
   // const data = req.body;
-  const requete = `UPDATE utilisateurs SET nom = '${utilisateur.nom}', prenom = '${utilisateur.prenom}', pseudo = '${utilisateur.pseudo}', mdp = '${utilisateur.mdp}', id_message = '${utilisateur.id_message}' WHERE id = '${req.params.id}'`;
+  const requete = `UPDATE utilisateurs SET nom = '${utilisateur.nom}', prenom = '${utilisateur.prenom}', pseudo = '${utilisateur.pseudo}', mdp = '${utilisateur.mdp}' WHERE id = '${req.params.id}'`;
   connection.query(requete, function (err, result) {
     if (err) throw err;
     res.send("1 record updated");

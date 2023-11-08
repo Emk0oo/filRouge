@@ -91,14 +91,6 @@ exports.updateUnivers = (req, res) => {
   // Utilisez une requête préparée pour mettre à jour les données
   const sql =
     "UPDATE univers SET description = ?, id_utilisateurs = ?, nom = ?, id_images = ?, nb_perso = ? WHERE id = ?";
-  // const values = [
-  //   body.description,
-  //   body.id_utilisateurs,
-  //   body.nom,
-  //   body.id_images,
-  //   body.nb_perso,
-  //   id,
-  // ];
 
   connection.query(sql, values, (err, result) => {
     if (err) {

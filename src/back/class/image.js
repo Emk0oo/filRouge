@@ -1,5 +1,3 @@
-const { fromMap } = require("./personnage");
-
 class Image{
 
 

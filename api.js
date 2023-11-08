@@ -41,11 +41,13 @@ app.post("/auth", (req, res) => {
   connection.query(requete, (err, rows, fields) => {
     if (err) {
       res.status(403).json({ error: "utilisateur inconnu" });
+      return;
     }
     console.log(rows);
 
 if(rows.length == 0) {
       res.status(403).json({ error: "utilisateur inconnu" });
+      return;
     }
 
     // jwt
@@ -53,11 +55,12 @@ if(rows.length == 0) {
     let nom = rows[0]["nom"]
 
     // generate token
-    jwt.sign({id, nom}, secretKey, { algorithm: 'RS256', expiresIn: '48h' }, (err, token) => {
-      res.json({
+    // const token= jwt.sign({id, nom}, secretKey, { algorithm: 'RS256', expiresIn: '48h' })
+    const token = jwt.sign({ id,nom}, secretKey, { expiresIn: '24h' }, { algorithm: 'RS256' });
+      res.status(200).json({
         token : token
       });
-    });
+      
 
   });
 });
