@@ -31,9 +31,19 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
   npm install
   ```
 
-  3. Créer le fichier .env à l'aide du .env-example
+*Mise en place de la structure de la base de données:*
 
- - Mise en place de la structure de la base de données:
+ 1. Créer une base de donnée MySQL nommé "fil_rouge"
+ 2. Importer le fichier fil_rouge.sql depuis le dossier /assets du dépot
+
+*Mise en place de l'environnement* 
+
+  1. Créer le fichier .env à l'aide du .env-example
+  2. Insérer les clés API :
+     * OpenAI
+     * StableDiffusion
+
+
 
    
   
