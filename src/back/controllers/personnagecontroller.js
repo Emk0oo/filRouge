@@ -63,6 +63,7 @@ exports.updatePersonnage = (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
   //const id = req.originalUrl.split("/")[2];
   const idCharacter = req.params.idCharacter; //req.params.id;
+  console.log(idCharacter);
   //const personnagesData = req.body;
   let sql =
     "UPDATE personnages SET nom = ?, id_images = ?, id_univers = ? WHERE id = ?";

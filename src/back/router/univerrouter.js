@@ -5,7 +5,7 @@ const universController = require("../controllers/universcontroller");
 router.get("/", universController.getAllUnivers);
 router.post("/add", universController.addUnivers);
 router.get("/:id", universController.getUniversById);
-router.put("/update/:id", universController.updateUnivers);
+router.put("/:id/update/", universController.updateUnivers);
 router.delete("/delete/:id", universController.deleteUnivers);
 
 const personnageRouter = require("./personnagerouter");
