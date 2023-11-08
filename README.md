@@ -19,7 +19,11 @@ API permettant de converser avec un personnage fictif dans son univers créer pa
 
 ## Installation
 
+  -Instruction de mise en place du code:
 
+  ```bash
+  git clone https://github.com/Emk0oo/filRouge.git
+```
 
 ## Lancement
 
