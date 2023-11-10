@@ -32,14 +32,17 @@ exports.getAllPersonnages = (req, res) => {
 
 exports.addPersonnage = async (req, res) => {
   let personnage = Personnage.fromMap(req.body); //from map
+  //get id from url 
+  const idUnivers = req.originalUrl.split("/")[2];
   await personnage.genererDescription();
   await personnage.genererPhotoProfil();
   let sql =
-    "INSERT INTO personnages (nom, description, id_images) VALUES (?, ?, ?)";
+    "INSERT INTO personnages (nom, description, id_images, id_univers) VALUES (?, ?, ?, ?)";
   const values = [
     personnage.nom,
     personnage.description.trim(),
     personnage.id_images,
+    idUnivers,
   ];
   console.log(values);
   connection.query(sql, values, (err, result) => {
