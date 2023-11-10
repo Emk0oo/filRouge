@@ -2,13 +2,12 @@ const Chatopenai = require("./chatopenai");
 const StableDiffusion = require("./stablediffusion");
 
 class Univers {
-  constructor(id, description, id_utilisateur, nom, id_images, nb_perso) {
+  constructor(id, description, id_utilisateur, nom, id_images) {
     this._id = id;
     this._description = description;
     this._id_utilisateur = id_utilisateur;
     this._nom = nom;
     this._id_images = id_images;
-    this._nb_perso = nb_perso;
   }
 
   static fromMap(map) {
@@ -17,7 +16,6 @@ class Univers {
     univers._id_utilisateur = map.id_utilisateur;
     univers._nom = map.nom;
     univers._id_images = map.id_images;
-    univers._nb_perso = map.nb_perso;
     return univers;
   }
 
@@ -28,7 +26,6 @@ class Univers {
       id_utilisateur: this._id_utilisateur,
       nom: this._nom,
       id_images: this._id_images,
-      nb_perso: this._nb_perso,
     };
   }
 
