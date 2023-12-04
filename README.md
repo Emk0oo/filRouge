@@ -59,6 +59,6 @@ API permettant de converser avec un personnage fictif dans son univers créée p
 2. Créer un utilisateur
 3. Créer un token en renseignant le pseudonyme & mot de passe
 4. Renseigner le token généré par le projet à chaque requête sur PostMan
-5. Creer un univers
-6. Creer un personnage
+5. Créer un univers
+6. Créer un personnage
 7. Dialoguer avec le personnage
