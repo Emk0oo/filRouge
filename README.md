@@ -1,6 +1,6 @@
 # filRouge
 
-API permettant de converser avec un personnage fictif dans son univers créer par l'utilisateur. 
+API permettant de converser avec un personnage fictif dans son univers crée par l'utilisateur. 
 
 ## Pré-requis
  - Language:
